@@ -130,7 +130,8 @@ obscureGroup <- function(result, minCellCount, estimateName) {
     dplyr::select("variable_name") |>
     dplyr::distinct() |>
     dplyr::pull("variable_name")
-  obsLabels <- obsLabels[tolower(gsub("_", " ", obsLabels)) %in% groupCount]
+ # obsLabels <- obsLabels[tolower(gsub("_", " ", obsLabels)) %in% groupCount]
+  obsLabels <- obsLabels[stringr::str_to_lower(stringr::str_replace_all(pattern = "_", replacement = " ", obsLabels)) %in% groupCount]
 
   groupsToObscure0 <- result |>
     dplyr::filter(
